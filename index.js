@@ -65,7 +65,7 @@ const listenOrientationChange = that => {
  * listenOrientationChange function has been invoked. This should be done in order to
  * avoid adding new listeners every time the same component is re-mounted.
  */
-const removeOrientationListener = () => {
+const removeOrientationListener = that => {
   Dimensions.removeEventListener('change', that.orientationChangeHandler);
 };
 
