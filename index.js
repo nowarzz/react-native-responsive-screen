@@ -47,7 +47,7 @@ const heightPercentageToDP = heightPercent => {
  *                      invoke setState method and trigger screen rerender (this.setState()).
  */
 const listenOrientationChange = that => {
-  that.orientationChangeHandler = new Dimensions => {
+  that.orientationChangeHandler = newDimensions => {
     screenWidth = newDimensions.window.width;
     screenHeight = newDimensions.window.height;
 
