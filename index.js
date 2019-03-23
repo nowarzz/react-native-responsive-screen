@@ -23,6 +23,22 @@ const widthPercentageToDP = widthPercent => {
 };
 
 /**
+ * Converts provided width percentage to independent pixel (dp).
+ * @param  {string} widthPercent The percentage of screen's width that UI element should cover
+ *                               along with the percentage symbol (%).
+ * @param  {number} componentWidth the width of the component
+ * @return {number}              The calculated dp depending on current device's screen width.
+ */
+const widthPercentageOfComponentToDP = (widthPercent,componentWidth) => {
+  // Parse string percentage input and convert it to number.
+  const elemWidth = typeof widthPercent === "number" ? widthPercent : parseFloat(widthPercent);
+
+  // Use PixelRatio.roundToNearestPixel method in order to round the layout
+  // size (dp) to the nearest one that correspons to an integer number of pixels.
+  return PixelRatio.roundToNearestPixel(componentWidth * elemWidth / 100);
+};
+
+/**
  * Converts provided height percentage to independent pixel (dp).
  * @param  {string} heightPercent The percentage of screen's height that UI element should cover
  *                                along with the percentage symbol (%).
@@ -35,6 +51,22 @@ const heightPercentageToDP = heightPercent => {
   // Use PixelRatio.roundToNearestPixel method in order to round the layout
   // size (dp) to the nearest one that correspons to an integer number of pixels.
   return PixelRatio.roundToNearestPixel(screenHeight * elemHeight / 100);
+};
+
+/**
+ * Converts provided height percentage to independent pixel (dp).
+ * @param  {string} heightPercent The percentage of screen's height that UI element should cover
+ *                                along with the percentage symbol (%).
+ * @param  {number} componentHeight the height of the component
+ * @return {number}               The calculated dp depending on current device's screen height.
+ */
+const heightPercentageOfComponentToDP = (heightPercent,componentHeight) => {
+  // Parse string percentage input and convert it to number.
+  const elemHeight = typeof heightPercent === "number" ? heightPercent : parseFloat(heightPercent);
+
+  // Use PixelRatio.roundToNearestPixel method in order to round the layout
+  // size (dp) to the nearest one that correspons to an integer number of pixels.
+  return PixelRatio.roundToNearestPixel(componentHeight * elemHeight / 100);
 };
 
 /**
@@ -72,6 +104,8 @@ const removeOrientationListener = that => {
 export {
   widthPercentageToDP,
   heightPercentageToDP,
+  widthPercentageOfComponentToDP,
+  heightPercentageOfComponentToDP,
   listenOrientationChange,
   removeOrientationListener
 };
