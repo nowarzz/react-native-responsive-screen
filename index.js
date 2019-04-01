@@ -100,7 +100,7 @@ const listenOrientationChange = that => {
  * @param {object} that Screen's class component this variable. The function needs it to
  *                      invoke setState method and trigger screen rerender (this.setState()).
  */
-const listenOrientationChangeHook = setOrientation => {
+const listenOrientationChangeHook = (that,setOrientation) => {
   that.orientationChangeHandler = newDimensions => {
     screenWidth = newDimensions.window.width;
     screenHeight = newDimensions.window.height;
