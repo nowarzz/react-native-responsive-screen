@@ -115,7 +115,7 @@ const useOrientationListener = ()=>  {
   const [orientation, setOrientation] = useState('');
   
   useEffect(()=>{
-   const orientationChangeHandler = ()=>{
+   const orientationChangeHandler = (newDimensions)=>{
      screenWidth = newDimensions.window.width;
      screenHeight = newDimensions.window.height; 
    }
