@@ -92,30 +92,6 @@ const listenOrientationChange = that => {
 };
 
 /**
- * Event listener function that detects orientation change (every time it occurs) and triggers 
- * screen rerendering. It does that, by changing the state of the screen where the function is
- * called. State changing occurs for a new state variable with the name 'orientation' that will
- * always hold the current value of the orientation after the 1st orientation change.
- * Invoke it inside the screen's constructor or in componentDidMount lifecycle method.
- * @param {object} that Screen's class component this variable. The function needs it to
- *                      invoke setState method and trigger screen rerender (this.setState()).
- */
-const listenOrientationChangeHook = (that,setOrientation) => {
-  that.orientationChangeHandler = newDimensions => {
-    screenWidth = newDimensions.window.width;
-    screenHeight = newDimensions.window.height;
-
-    // Trigger screen's rerender with a state update of the orientation variable
-    if(setOrientation){
-      setOrientation(screenWidth < screenHeight ? 'portrait' : 'landscape');
-    }
-    
-  }
-  Dimensions.addEventListener('change', that.orientationChangeHandler);
-};
-
-
-/**
  * Wrapper function that removes orientation change listener and should be invoked in
  * componentWillUnmount lifecycle method of every class component (UI screen) that
  * listenOrientationChange function has been invoked. This should be done in order to
@@ -133,6 +109,5 @@ export {
   widthPercentageOfComponentToDP,
   heightPercentageOfComponentToDP,
   listenOrientationChange,
-  listenOrientationChangeHook,
   removeOrientationListener
 };
