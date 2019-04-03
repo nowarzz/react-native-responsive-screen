@@ -113,6 +113,8 @@ const removeOrientationListener = that => {
  */
 const useOrientationListener = ()=>  {
   const [orientation, setOrientation] = useState('');
+  const [screenWidth, setScreenWidth] = useState(0);
+  const [screenHeight, setScreenHeight] = useState(0);
   
   useEffect(()=>{
    const orientationChangeHandler = (newDimensions)=>{
@@ -120,6 +122,8 @@ const useOrientationListener = ()=>  {
      screenHeight = newDimensions.window.height; 
      const _orientation = screenWidth < screenHeight ? 'potrait' : 'landscape';
      setOrientation(_orientation);
+     setScreenWidth(screenWidth);
+     setScreenHeight(screenHeight);
    }
    Dimensions.addEventListener('change',orientationChangeHandler);
     return(()=>{
@@ -127,7 +131,7 @@ const useOrientationListener = ()=>  {
     })
   },[]);
   
-  return orientation;
+  return [orientation,screenWidth,screenHeight];
 }
 
 export {
