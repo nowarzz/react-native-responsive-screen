@@ -118,6 +118,8 @@ const useOrientationListener = ()=>  {
    const orientationChangeHandler = (newDimensions)=>{
      screenWidth = newDimensions.window.width;
      screenHeight = newDimensions.window.height; 
+     const _orientation = screenWidth < screenHeight ? 'potrait' : 'landscape';
+     setOrientation(_orientation);
    }
    Dimensions.addEventListener('change',orientationChangeHandler);
     return(()=>{
