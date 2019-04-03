@@ -112,9 +112,9 @@ const removeOrientationListener = that => {
  *                      invoke setState method and trigger screen rerender (this.setState()).
  */
 const useOrientationListener = ()=>  {
-  const [orientation, setOrientation] = useState('');
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [orientation, setOrientation] = useState(screenWidth < screenHeight ? 'potrait' : 'landscape');
+  const [width, setWidth] = useState(screenWidth);
+  const [height, setHeight] = useState(screenHeight);
   
   useEffect(()=>{
    const orientationChangeHandler = (newDimensions)=>{
