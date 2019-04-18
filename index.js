@@ -122,29 +122,13 @@ const useOrientationListener = ()=>  {
      screenHeight = newDimensions.window.height; 
      const _orientation = screenWidth < screenHeight ? 'potrait' : 'landscape';
      setOrientation(_orientation);
-     switch(_orientation){
-       case 'potrait':
-         setWidth(screenWidth);
-         setHeight(screenHeight);
-         break;
-       case 'landscape':
-         setWidth(screenHeight);
-         setHeight(screenWidth);
-         break;
-     }
+     setWidth(screenWidth);
+     setHeight(screenHeight);
    }
    const _orientation = screenWidth < screenHeight ? 'potrait' : 'landscape';
    setOrientation(_orientation);
-   switch(_orientation){
-     case 'potrait':
-       setWidth(screenWidth);
-       setHeight(screenHeight);
-       break;
-     case 'landscape':
-       setWidth(screenHeight);
-       setHeight(screenWidth);
-       break;
-   }
+   setWidth(screenWidth);
+   setHeight(screenHeight);
    Dimensions.addEventListener('change',orientationChangeHandler);
     return(()=>{
       Dimensions.removeEventListener('change',orientationChangeHandler);
