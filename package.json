@@ -1,6 +1,6 @@
 {
   "name": "react-native-responsive-screen",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Make React Native views responsive for all devices with the use of 2 simple methods.",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/marudy/react-native-responsive-screen#readme",
   "peerDependencies": {
-    "react-native": ">=0.35"
+    "react-native": ">=0.35",
+    "react-native-device-info": ">=5.0.0"
   }
 }

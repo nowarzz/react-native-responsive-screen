@@ -1,11 +1,16 @@
 // packages
-import { Dimensions, PixelRatio } from 'react-native';
+import { Dimensions, PixelRatio, StatusBar } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
+
+const AndroidVersion = DeviceInfo.getSystemVersion();
+
+const modifier = AndroidVersion === "8.1.0" ? StatusBar.currentHeight * 2 : 0
 
 // Retrieve initial screen's width
 let screenWidth = Dimensions.get('window').width;
 
 // Retrieve initial screen's height
-let screenHeight = Dimensions.get('window').height;
+let screenHeight = Dimensions.get('window').height - modifier;
 
 /**
  * Converts provided width percentage to independent pixel (dp).
@@ -29,7 +34,7 @@ const widthPercentageToDP = widthPercent => {
  * @param  {number} componentWidth the width of the component
  * @return {number}              The calculated dp depending on current device's screen width.
  */
-const widthPercentageOfComponentToDP = (widthPercent,componentWidth) => {
+const widthPercentageOfComponentToDP = (widthPercent, componentWidth) => {
   // Parse string percentage input and convert it to number.
   const elemWidth = typeof widthPercent === "number" ? widthPercent : parseFloat(widthPercent);
 
@@ -60,7 +65,7 @@ const heightPercentageToDP = heightPercent => {
  * @param  {number} componentHeight the height of the component
  * @return {number}               The calculated dp depending on current device's screen height.
  */
-const heightPercentageOfComponentToDP = (heightPercent,componentHeight) => {
+const heightPercentageOfComponentToDP = (heightPercent, componentHeight) => {
   // Parse string percentage input and convert it to number.
   const elemHeight = typeof heightPercent === "number" ? heightPercent : parseFloat(heightPercent);
 
