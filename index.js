@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from 'react';
 // packages
 import { Dimensions, PixelRatio, StatusBar } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -106,11 +107,44 @@ const removeOrientationListener = that => {
   Dimensions.removeEventListener('change', that.orientationChangeHandler);
 };
 
+/**
+ * Event listener function that detects orientation change (every time it occurs) and triggers 
+ * screen rerendering. It does that, by changing the state of the screen where the function is
+ * called. State changing occurs for a new state variable with the name 'orientation' that will
+ * always hold the current value of the orientation after the 1st orientation change.
+ * Invoke it inside the screen's constructor or in componentDidMount lifecycle method.
+ * @param {object} that Screen's class component this variable. The function needs it to
+ *                      invoke setState method and trigger screen rerender (this.setState()).
+ */
+const useOrientationListener = ()=>  {
+  const [orientation, setOrientation] = useState(Dimensions.get('window').width < Dimensions.get('window').height ? 'potrait' : 'landscape');
+  const [width, setWidth] = useState(Dimensions.get('window').width);
+  const [height, setHeight] = useState(Dimensions.get('window').height);
+  
+  useEffect(()=>{
+   const orientationChangeHandler = (newDimensions)=>{
+     screenWidth = newDimensions.window.width;
+     screenHeight = newDimensions.window.height; 
+     const _orientation = screenWidth < screenHeight ? 'potrait' : 'landscape';
+     setOrientation(_orientation);
+     setWidth(screenWidth);
+     setHeight(screenHeight);
+   }
+   Dimensions.addEventListener('change',orientationChangeHandler);
+    return(()=>{
+      Dimensions.removeEventListener('change',orientationChangeHandler);
+    })
+  },[]);
+  
+  return [orientation,screenWidth,screenHeight];
+}
+
 export {
   widthPercentageToDP,
   heightPercentageToDP,
   widthPercentageOfComponentToDP,
   heightPercentageOfComponentToDP,
   listenOrientationChange,
-  removeOrientationListener
+  removeOrientationListener,
+  useOrientationListener
 };
